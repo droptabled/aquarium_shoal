@@ -1,0 +1,4 @@
+{% for fish in fishes %}
+    <p> {{fish.scientific_name}} </p>
+{% endfor %}
+<a href="{% url 'pages-new' %}">New Fish</a>
