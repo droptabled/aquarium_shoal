@@ -10,3 +10,6 @@ class Fish(models.Model):
     max_fish_size = models.FloatField()
     min_tank_size = models.FloatField()
     max_tank_size = models.FloatField()
+
+class Result(models.Model):
+    fish_id = models.ForeignKey(to=Fish, on_delete=models.CASCADE)
