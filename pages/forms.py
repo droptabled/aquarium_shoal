@@ -1,4 +1,5 @@
 from django import forms
 
 class FishForm(forms.Form):
-    fish_name = forms.CharField(label='Fish Name', max_length=100)
+    scientific_name = forms.CharField(label='Scientific Name', max_length=100)
+    common_names = forms.CharField(label='Common Names (comma delimited)')

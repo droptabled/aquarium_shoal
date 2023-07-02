@@ -15,5 +15,8 @@ def new(request):
     return render(request, 'pages/new.html', {'form': FishForm()})
 
 def create(request):
-    breakpoint
+    Fish.objects.create(
+        scientific_name=request.POST['scientific_name'],
+        common_names=request.POST['common_names'].split(","),
+    )
     return HttpResponse("Fish created")

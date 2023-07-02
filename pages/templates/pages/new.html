@@ -1,7 +1,11 @@
-<form action="/pages-create/" method="post">
+{% extends "pages/base.html" %}
+
+{% block content %}
+<form action="/create" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <p>
         <input type="submit" value="New Fish">
     </p>
 </form>
+{% endblock %}
