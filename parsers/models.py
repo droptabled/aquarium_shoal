@@ -11,5 +11,8 @@ class Fish(models.Model):
     min_tank_size = models.FloatField(null=True)
     max_tank_size = models.FloatField(null=True)
 
+    def common_name_string(self):
+        return ", ".join(self.common_names)
+
 class Result(models.Model):
     fish_id = models.ForeignKey(to=Fish, on_delete=models.CASCADE)

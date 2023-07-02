@@ -15,8 +15,16 @@ def new(request):
     return render(request, 'pages/new.html', {'form': FishForm()})
 
 def create(request):
-    Fish.objects.create(
+    fish = Fish.objects.create(
         scientific_name=request.POST['scientific_name'],
         common_names=request.POST['common_names'].split(","),
     )
-    return HttpResponse("Fish created")
+
+    template = loader.get_template('pages/fish.html')
+    return HttpResponse(template.render({'fish': fish}, request))
+
+def fish(request, fish_id):
+    fish = Fish.objects.get(pk=fish_id)
+
+    template = loader.get_template('pages/fish.html')
+    return HttpResponse(template.render({'fish': fish}, request))

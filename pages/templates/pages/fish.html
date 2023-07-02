@@ -1,0 +1,9 @@
+{% extends "pages/base.html" %}
+
+{% block content %}
+
+<h1>{{ fish.scientific_name }}</h1>
+<h4>Also known as:
+    {{ fish.common_name_string }}
+<h4>
+{% endblock %}

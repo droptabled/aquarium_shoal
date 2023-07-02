@@ -2,7 +2,7 @@
 
 {% block content %}
 {% for fish in fishes %}
-    <p> {{fish.scientific_name}} </p>
+    <p><a href={% url 'pages-fish' fish.id %}>{{ fish.common_names }}</a></p>
 {% endfor %}
 <a href="{% url 'pages-new' %}">New Fish</a>
 {% endblock %}
