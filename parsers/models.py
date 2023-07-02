@@ -5,11 +5,11 @@ from django.contrib.postgres.fields import ArrayField
 class Fish(models.Model):
     scientific_name = models.CharField(max_length=255)
     common_names = ArrayField(models.CharField(max_length=50))
-    description = models.TextField()
-    min_fish_size = models.FloatField()
-    max_fish_size = models.FloatField()
-    min_tank_size = models.FloatField()
-    max_tank_size = models.FloatField()
+    description = models.TextField(null=True)
+    min_fish_size = models.FloatField(null=True)
+    max_fish_size = models.FloatField(null=True)
+    min_tank_size = models.FloatField(null=True)
+    max_tank_size = models.FloatField(null=True)
 
 class Result(models.Model):
     fish_id = models.ForeignKey(to=Fish, on_delete=models.CASCADE)
