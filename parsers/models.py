@@ -14,5 +14,8 @@ class Fish(models.Model):
     def common_name_string(self):
         return ", ".join(self.common_names)
 
+    def __str__(self):
+        return self.common_names[0] or self.scientific_name
+
 class Result(models.Model):
     fish_id = models.ForeignKey(to=Fish, on_delete=models.CASCADE)

@@ -1,5 +1,6 @@
 from django import forms
+from parsers.models import Fish
 
 class FishParserForm(forms.Form):
-    fish = forms.CharField(label='Fish Name', max_length=100)
+    fish = forms.ModelChoiceField(Fish.objects.all())
     url = forms.CharField(label='URL', max_length=255)
