@@ -1,7 +1,6 @@
 import json
-from jsonformer import Jsonformer
-from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
-
+import os
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, pipeline
 
 class LLMParser:
     json_schema = {
@@ -27,16 +26,18 @@ class LLMParser:
             "temperature": {"type": "string"},
         }
     }
-    tokenizer = AutoTokenizer.from_pretrained("google/flan-t5-xxl")
-    model = AutoModelForSeq2SeqLM.from_pretrained("google/flan-t5-xxl")
+    tokenizer = AutoTokenizer.from_pretrained(os.environ['LLM_SOURCE'])
+    model = AutoModelForSeq2SeqLM.from_pretrained(os.environ['LLM_SOURCE'])
 
     @classmethod
     def parse(cls, website_html: str) -> dict:
+        breakpoint()
+        generator = pipeline("text2text-generation", model=cls.model)
         prompt = f'''
         Use this document: {website_html}
         Extract important fields into a JSON object
         If a field can't be found, return "Not Found"
-        Use the following schema:'''
-        jsonformer = Jsonformer(cls.model, cls.tokenizer, cls.json_schema, prompt)
-        generated_data = jsonformer()
+        Use the following schema: {cls.json_schema}'''
+        generated_data = generator(prompt)
+        breakpoint()
         return generated_data
