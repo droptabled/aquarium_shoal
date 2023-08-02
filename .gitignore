@@ -138,3 +138,6 @@ GitHub.sublime-settings
 
 # Secrets
 secrets.sh
+
+# LLM Models
+/llm_models
