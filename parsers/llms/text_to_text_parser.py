@@ -1,8 +1,6 @@
-import json
-import os
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, pipeline
 
-class LLMParser:
+class TextToTextParser():
     fields = [
         # Nomenclature
         "name",
@@ -22,8 +20,18 @@ class LLMParser:
         "carbonate hardness",
         "temperature",
     ]
-    tokenizer = AutoTokenizer.from_pretrained(os.environ['LLM_SOURCE'])
-    model = AutoModelForSeq2SeqLM.from_pretrained(os.environ['LLM_SOURCE'])
+
+    tokenizer = AutoTokenizer.from_pretrained('./llm_models/flan_t5_large')
+    model = AutoModelForSeq2SeqLM.from_pretrained('./llm_models/flan_t5_large')
+
+    def tokenizer():
+        raise "Derived class must implement tokenizer"
+
+    def model():
+        raise "Derived class must implement tokenizer"
+    
+    def pipeline_type():
+        raise "Derived class must implement generator"
 
     @classmethod
     def parse(cls, website_html: str) -> dict:

@@ -1,9 +1,9 @@
 from bs4 import BeautifulSoup
 from django.template import loader
 from django.http import HttpResponse
+from parsers.llms.question_parser import QuestionParser
 from .models import Fish
 from .forms import FishParserForm
-from .llm_parser import LLMParser
 import requests
 
 # Create your views here.
@@ -28,7 +28,7 @@ def create(request):
 
     # first table
     text += tables[0].get_text(" ")
-    parsed_json = LLMParser.parse(text)
+    parsed_json = QuestionParser.parse(text)
     breakpoint()
 
     return HttpResponse("Completed parse")
